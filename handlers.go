@@ -514,13 +514,13 @@ func MakeBasicHandler(fpath, lvl string, quiet bool) (Handler, error) {
 		streamHandlerConf HandlerConf = HandlerConf{"discard"}
 	)
 	if fpath != "" {
-		fileHandlerConf = HandlerConf{"file", fpath, "logfmt"}
+		fileHandlerConf = HandlerConf{"file", fpath, "json"}
 	}
 	if !quiet {
 		if terminal.IsTerminal(int(os.Stdout.Fd())) {
 			streamHandlerConf = HandlerConf{"stream", "stderr", "terminal"}
 		} else {
-			streamHandlerConf = HandlerConf{"stream", "stderr", "logfmt"}
+			streamHandlerConf = HandlerConf{"stream", "stderr", "json"}
 		}
 	}
 
