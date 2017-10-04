@@ -6,6 +6,7 @@ import (
 	"golang.org/x/crypto/ssh/terminal"
 	"gopkg.in/inconshreveable/log15.v2"
 	"io"
+	"log/syslog"
 	"os"
 )
 
@@ -421,7 +422,7 @@ func MakeHandler(conf HandlerConf) (Handler, error) {
 			return nil, err
 		}
 
-		return log15.SyslogHandler(tag, formatter)
+		return log15.SyslogHandler(syslog.LOG_DEBUG, tag, formatter)
 
 	case "syslog_net":
 		// syslog_net (net string, address string, tag string, format string)
@@ -450,7 +451,7 @@ func MakeHandler(conf HandlerConf) (Handler, error) {
 			return nil, err
 		}
 
-		return log15.SyslogNetHandler(network, address, tag, formatter)
+		return log15.SyslogNetHandler(network, address, syslog.LOG_DEBUG, tag, formatter)
 
 	case "redis":
 		// redis (ip_port string, channel string)
